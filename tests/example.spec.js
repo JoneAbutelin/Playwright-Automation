@@ -60,8 +60,14 @@ test.only("sample test", async ({ browser }) => {
 
   const text = await newPage.locator(".red").textContent();
   console.log(text);
-  const aText = text.s
-
+  const aText = text.split("@");
+  const domain = aText[1].split(" ")[0];
+  console.log("Domain Name:", domain);
+  await page.bringToFront();
+  await page.pause();
+  await page.locator("#username").fill(domain);
+  await expect(page.locator("#username")).toHaveValue(domain);
+  console.log(await username.inputValue());
 
   //await page.pause();
   // console.log(await page.locator(".card-body a").nth(0).textContent());
